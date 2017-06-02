@@ -1,4 +1,4 @@
-package io.github.gbui.bloodkilleffect.client;
+package io.github.gbui.bloodkilleffect;
 
 import io.github.gbui.bloodkilleffect.BloodKillEffectMod;
 import net.minecraft.client.Minecraft;

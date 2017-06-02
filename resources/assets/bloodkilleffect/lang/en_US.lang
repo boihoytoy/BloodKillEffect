@@ -1,3 +1,5 @@
 bloodkilleffect.configgui.title=Blood Kill Effect Mod Configuration
+bloodkilleffect.configgui.enabled=Enabled
+bloodkilleffect.configgui.enabled.tooltip=Set this to false to turn off blood particles.
 bloodkilleffect.configgui.playersOnly=Players Only
 bloodkilleffect.configgui.playersOnly.tooltip=Set this to false to spawn blood particles for all living entities.
