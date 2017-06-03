@@ -3,7 +3,7 @@
   "modid": "BloodKillEffect",
   "name": "Blood Kill Effect Mod",
   "description": "Spawns blood particles when a player dies.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "mcversion": "1.8.9",
   "logoFile": "",
   "url": "https://github.com/gbui/BloodKillEffect",

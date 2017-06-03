@@ -9,10 +9,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -26,7 +26,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public class BloodKillEffectMod {
     public static final String MODID = "BloodKillEffect";
     public static final String NAME = "Blood Kill Effect Mod";
-    public static final String VERSION = "0.0.3";
+    public static final String VERSION = "0.0.4";
 
     public static boolean enabled;
     public static boolean playersOnly;
@@ -42,7 +42,7 @@ public class BloodKillEffectMod {
         config = new Configuration(event.getSuggestedConfigurationFile());
         syncConfig(true);
 
-        MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance().bus().register(this);
     }
 
     public static Configuration getConfig() {
