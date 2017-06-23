@@ -11,10 +11,13 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -26,7 +29,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public class BloodKillEffectMod {
     public static final String MODID = "BloodKillEffect";
     public static final String NAME = "Blood Kill Effect Mod";
-    public static final String VERSION = "0.0.4";
+    public static final String VERSION = "0.0.5-alpha.1";
 
     public static boolean enabled;
     public static boolean playersOnly;
@@ -83,15 +86,28 @@ public class BloodKillEffectMod {
         World world = Minecraft.getMinecraft().theWorld;
         if (world != null) {
             for (Entity entity : world.loadedEntityList) {
-                if (entity instanceof EntityLivingBase && (!playersOnly || entity instanceof EntityPlayer)) {
-                    EntityLivingBase livingEntity = (EntityLivingBase) entity;
-                    if (livingEntity.deathTime == 1) {
-                        BlockPos pos = new BlockPos(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ);
-                        IBlockState blockState = Blocks.redstone_block.getDefaultState();
-                        Minecraft.getMinecraft().renderGlobal.playAuxSFX(null, 2001, pos, Block.getStateId(blockState));
-                    }
+                if (entity instanceof EntityLivingBase && ((EntityLivingBase) entity).deathTime == 1) {
+                    spawnBlood(entity);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public void onLivingDeath(LivingDeathEvent event) {
+        spawnBlood(event.entity);
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public void onLivingDrops(LivingDropsEvent event) {
+        spawnBlood(event.entity);
+    }
+
+    private void spawnBlood(Entity entity) {
+        if (entity instanceof EntityLivingBase && (!playersOnly || entity instanceof EntityPlayer)) {
+            BlockPos pos = new BlockPos(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ);
+            IBlockState blockState = Blocks.redstone_block.getDefaultState();
+            Minecraft.getMinecraft().renderGlobal.playAuxSFX(null, 2001, pos, Block.getStateId(blockState));
         }
     }
 }
