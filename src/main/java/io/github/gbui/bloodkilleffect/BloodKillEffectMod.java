@@ -61,7 +61,7 @@ public class BloodKillEffectMod {
         prop.setLanguageKey("bloodkilleffect.configgui.enabled");
         enabled = prop.getBoolean();
 
-        prop = config.get(category, "playersOnly", true);
+        prop = config.get(category, "playersOnly", false);
         prop.setLanguageKey("bloodkilleffect.configgui.playersOnly");
         playersOnly = prop.getBoolean();
 
